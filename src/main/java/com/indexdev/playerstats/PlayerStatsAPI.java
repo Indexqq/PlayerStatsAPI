@@ -1,8 +1,9 @@
 package com.indexdev.playerstats;
 
+import com.indexdev.playerstats.util.SingletonTrait;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class PlayerStatsAPI extends JavaPlugin {
+public class PlayerStatsAPI extends JavaPlugin implements SingletonTrait<PlayerStatsAPI> {
 
     private static PlayerStatsAPI instance;
     private PlayerStatsManager statsManager;
@@ -11,13 +12,14 @@ public class PlayerStatsAPI extends JavaPlugin {
     public void onEnable() {
         instance = this;
         saveDefaultConfig();
-        this.statsManager = new PlayerStatsManager(this);
+        statsManager = new PlayerStatsManager(this);
         getServer().getPluginManager().registerEvents(new JoinQuitListener(statsManager), this);
         getCommand("playerstats").setExecutor(new com.indexdev.playerstats.commands.StatsCommand());
         getLogger().info("PlayerStatsAPI habilitado correctamente.");
     }
 
-    public static PlayerStatsAPI getInstance() {
+    @Override
+    public PlayerStatsAPI getInstance() {
         return instance;
     }
 
