@@ -1,9 +1,9 @@
 package com.indexdev.playerstats;
 
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.EventHandler;
 
 public class JoinQuitListener implements Listener {
 
@@ -15,11 +15,11 @@ public class JoinQuitListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        manager.load(event.getPlayer().getUniqueId());
+        manager.loadStats(event.getPlayer());
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
-        manager.save(event.getPlayer().getUniqueId());
+        manager.saveStats(event.getPlayer());
     }
 }
