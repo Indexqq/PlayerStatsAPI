@@ -1,7 +1,6 @@
 package com.indexdev.playerstats.commands;
 
 import com.indexdev.playerstats.PlayerStatsAPI;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,9 +15,8 @@ public class StatsCommand implements CommandExecutor {
             return true;
         }
 
-        var stats = PlayerStatsAPI.getInstance().getStatsManager().getStats(player.getUniqueId());
-        player.sendMessage(ChatColor.GREEN + "Tus estadísticas:");
-        stats.forEach((k, v) -> player.sendMessage(ChatColor.YELLOW + k + ": " + ChatColor.AQUA + v));
+        int kills = PlayerStatsAPI.getInstance().getStatsManager().getKills(player.getUniqueId());
+        player.sendMessage("§aTienes §e" + kills + "§a kills.");
         return true;
     }
 }
